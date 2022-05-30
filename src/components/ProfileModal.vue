@@ -10,7 +10,7 @@
         <validation-observer v-slot="{ handleSubmit }">
           <form id="updateUser" @submit.prevent="handleSubmit(save)">
             <span class="form-label">{{ $t('fields.name') }}</span>
-            <input v-model="thisUser.displayName" rules="required" :disabled="!me" @input="edit" class="form__field" />
+            <input v-model="thisUser.displayName" rules="required" :disabled="!me" class="form__field" />
           </form>
         </validation-observer>
         <label class="form-group">
@@ -20,8 +20,6 @@
             v-model="thisUser.position"
             :options="jobPositions"
             :get-option-label="(option) => $t(`user.position.${option}`)"
-            class=""
-            @input="edit"
           >
           </v-select>
           <div v-else class="profileModal__input">
@@ -36,7 +34,6 @@
             v-model="thisUser.preferences.lang"
             :options="languages"
             :get-option-label="(option) => $t(`languages.${option}`)"
-            @input="edit"
           >
           </v-select>
         </label>
@@ -45,7 +42,7 @@
           v-if="me || $store.state.user.superAdmin"
           class="btn btn--sec profileModal__save-button"
           form="updateUser"
-          :disabled="loading || !changes"
+          :disabled="loading"
         >
           {{ $t('btn.save') }}
         </button>
